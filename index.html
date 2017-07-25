@@ -22,7 +22,7 @@
       <div class="col-xs-12 text-center">
         <h1>twittler <i class="fa fa-twitter" aria-hidden="true"></i></h1>
       </div>
-      <button class="btn col-sm-4 col-sm-offset-4" id="enterSite">Enter</button>
+      <button class="btn col-sm-4 col-sm-offset-4 col-xs-12 col-xs-offset-0" id="enterSite">Enter</button>
     </div>
 
     <div id="userInfo" class="col-xs-12 hidden">
@@ -38,17 +38,11 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#"><h2>twittler</h2> <i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="col-xs-12">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Feed<span class="sr-only">(current)</span></a></li>
           </ul>
@@ -70,11 +64,7 @@
       </div><!-- /.container-fluid -->
     </nav>
 <div class="mainContent">
-  <div class="col-xs-12">
-    <button class="btn col-sm-4 col-sm-offset-1 col-xs-12 col-xs-offset-0" id="generateTweetButton">Update Feed</button>
-  </div>
-  <div id="tweets" class="col-sm-5 col-sm-offset-1 col-xs-12 col-xs-offset-0">
-  </div>
+
   <div id="tweetForm" class="hidden">
     <form class="">
       <div class="form-group">
@@ -85,8 +75,13 @@
         <label for="message">Message</label>
         <textarea type="textarea" class="form-control" rows="5" placeholder="Tweet Tweet Tweet" id="message"></textarea>
       </div>
-      <button type="submit" class="btn" id="writeTweetBtn">Tweet Away</button>
+      <button type="submit" class="btn col-sm-4 col-sm-offset-4 col-xs-12 col-xs-offset-0" id="writeTweetBtn">Tweet Away</button>
     </form>
+  </div>
+  <div class="col-xs-12">
+    <button class="btn col-sm-4 col-sm-offset-1 col-xs-12 col-xs-offset-0" id="generateTweetButton">Update Feed</button>
+  </div>
+  <div id="tweets" class="col-sm-5 col-sm-offset-1 col-xs-12 col-xs-offset-0">
   </div>
 </div>
 
