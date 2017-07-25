@@ -1,24 +1,141 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Twittler</title>
+    <link rel="shortcut icon" href="images/titleIcon.png" />
+    <meta name="description" content="">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- BOOTSTRAP Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- BOOTSTRAP Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Croissant+One|Raleway" rel="stylesheet">
+    <!-- FONTAWESOME -->
+    <script src="https://use.fontawesome.com/06591f047d.js"></script>
+    <script src="jQueryTimeAgo.js"></script>
   </head>
   <body>
+    <div id="titlePage" class="col-xs-12">
+      <div class="col-xs-12 text-center">
+        <h1>twittler <i class="fa fa-twitter" aria-hidden="true"></i></h1>
+      </div>
+      <button class="btn col-sm-4 col-sm-offset-4" id="enterSite">Enter</button>
+    </div>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><h2>twittler</h2> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Feed<span class="sr-only">(current)</span></a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="navUsername" href="#">Anonymous User</a></li>
+            <form class="navbar-form navbar-right">
+              <div class="form-group">
+                <a href="#" class="btn" id="makeTweet">Tweet</a>
+              </div>
+            </form>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+<div class="mainContent">
+  <div class="col-xs-12">
+    <button class="btn col-sm-4 col-sm-offset-1 col-xs-12 col-xs-offset-0" id="generateTweetButton">Update Feed</button>
+  </div>
+  <div id="tweets" class="col-sm-5 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+  </div>
+  <div id="tweetForm" class="hidden">
+    <form class="">
+      <div class="form-group">
+        <label for="visitor">Username</label>
+        <input type="text" class="form-control" placeholder="Username" id="visitor">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea type="textarea" class="form-control" rows="5" placeholder="Tweet Tweet Tweet" id="message"></textarea>
+      </div>
+      <button type="submit" class="btn" id="writeTweetBtn">Tweet Away</button>
+    </form>
+  </div>
+</div>
+
+
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var visitor;
+        var message;
+        $("#writeTweetBtn").click(function() {
+          visitor = $("#visitor").val();
+          message = $("#message").val();
+          $("#navUsername").text('Signed in as ' + visitor)
+          writeTweet(message);
+          generateTweetHtml();
+        });
+        var writeTweet = function(message){
+          if(!visitor){
+            throw new Error('set the global visitor property!');
+          }
+          var tweet = {};
+          tweet.user = visitor;
+          tweet.message = message;
+          tweet.created_at = new Date();
+          addTweet(tweet);
+        };
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+        var $tweets = $('#tweets');
+        function generateTweetHtml() {
+          var index = streams.home.length - 1;
+          if(index >= 0){
+            var tweet = streams.home[index];
+            var d = new Date();
+            var dateCreated = {
+              year: d.getFullYear(),
+              month: d.getMonth() + 1,
+              day: d.getDate(),
+              hours: d.getHours(),
+              minutes: d.getMinutes(),
+              seconds: d.getSeconds()
+            }
+            var $tweet = $('<div class="tweet col-xs-12"></div>');
+            $tweet.html('<span class="userName">@' + tweet.user + '</span>: ' + tweet.message + '<time class="timeago col-xs-12" datetime="' + dateCreated.year + '-' + dateCreated.month + '-' + dateCreated.day + ' ' + dateCreated.hours + ':' + dateCreated.minutes + ':' + dateCreated.seconds + '"></time>');
+            $tweet.prependTo($tweets);
+            index -= 1;
+          }
+          jQuery("time.timeago").timeago();
         }
+        $("#generateTweetButton").click(generateTweetHtml);
+        $("#makeTweet").click(function() {
+          $("#tweetForm").toggleClass("hidden");
+          $("#tweetForm").toggleClass("col-sm-5 col-sm-offset-7 col-xs-12");
+        });
+        $("#enterSite").click(function() {
+          $("#titlePage").fadeOut();
+        });
+        $(".navbar-brand").click(function() {
+          $("#titlePage").fadeIn();
+        });
 
       });
 

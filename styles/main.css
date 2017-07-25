@@ -1,0 +1,149 @@
+.hidden {
+  display:none;
+}
+
+#titlePage {
+  position:absolute;
+  z-index:10;
+  height:100%;
+  background-color: skyblue;
+}
+
+#titlePage h1 {
+  margin-top:200px;
+  margin-bottom:50px;
+  font-family:'Croissant One', sans-serif;
+  font-size:150px;
+  color:white;
+  letter-spacing: -5px;
+}
+
+#titlePage .btn {
+  font-family: 'Raleway', sans-serif;
+  padding:20px;
+  border-radius:15px;
+  font-size:40px !important;
+  color:skyblue;
+  background-color:white;
+  box-shadow:none;
+}
+
+.navbar {
+  font-family: 'Raleway', sans-serif;
+  background-color: skyblue;
+}
+
+.navbar-brand h2 {
+  position:relative;
+  display:inline;
+  font-family: 'Croissant One', sans-serif !important;
+  font-weight:normal;
+  font-size:23px;
+  margin: 0;
+}
+
+.navbar-header, .navbar-brand, .nav li, .nav a {
+  color:white;
+  text-shadow: none;
+  font-family: 'Raleway', sans-serif;
+}
+
+.navbar input {
+  box-shadow: none;
+  border:none;
+  color:skyblue;
+  font-family: 'Raleway', sans-serif;
+}
+
+/*PLACEHOLDER TEXT STYLING*/
+.navbar input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: skyblue;
+  }
+.navbar input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color: skyblue;
+     opacity: 1;
+  }
+.navbar input::-moz-placeholder { /* Mozilla Firefox 19+ */
+     color: skyblue;
+     opacity: 1;
+  }
+.navbar input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+     color: skyblue;
+  }
+.navbar input::-ms-input-placeholder { /* Microsoft Edge */
+     color: skyblue;
+  }
+
+.btn, .btn:hover, .btn:active {
+  font-family: 'Raleway', sans-serif;
+  color:skyblue !important;
+  background-color: white !important;
+  font-size: 15px !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.userName {
+  font-weight:bold;
+}
+
+.tweet {
+  font-family:'Raleway', sans-serif;
+  color:gray;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  padding:20px;
+  font-size: 20px;
+  border-bottom: 1px solid gray;
+  margin-bottom:10px;
+}
+
+#generateTweetButton, #writeTweetBtn{
+  font-family: 'Raleway', sans-serif;
+  color:white !important;
+  background-color: skyblue !important;
+  padding:15px;
+  font-size:20px !important;
+  border-radius:10px;
+}
+
+.timeago {
+  font-size:12px;
+  color:lightgray;
+}
+
+#tweetForm {
+  padding-top:30px;
+  position:fixed;
+  height:100%;
+  border-left: 3px solid skyblue;
+}
+
+#tweetForm input, #tweetForm textarea {
+  font-family: 'Raleway', sans-serif;
+  box-shadow:none;
+  border:1px solid skyblue;
+  border-radius:10px;
+  font-size:15px;
+  color:skyblue;
+}
+
+#tweetForm input {
+  padding: 20px;
+}
+
+#tweetForm textarea {
+  padding: 10px;
+}
+
+#tweetForm button {
+  margin-top:20px;
+}
+
+label {
+  font-family: 'Croissant One', sans-serif;
+  color:skyblue;
+  font-weight:normal !important;
+  font-size:20px;
+  margin-top:20px;
+}
