@@ -24,6 +24,16 @@
       </div>
       <button class="btn col-sm-4 col-sm-offset-4" id="enterSite">Enter</button>
     </div>
+
+    <div id="userInfo" class="col-xs-12 hidden">
+      <button class="btn col-sm-2" id="goBack">Go Back</button>
+      <!-- streams.users.userName, properties created_at and message -->
+      <div class="text-left col-sm-8 col-sm-offset-2">
+        <h3>Username: </h3><div id="userInfoName"></div>
+        <h3>Post History: </h3><div id="userInfoPostHistory"><!-- append post divs in here --></div>
+      </div>
+    </div>
+
     <nav class="navbar">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -119,7 +129,7 @@
               seconds: d.getSeconds()
             }
             var $tweet = $('<div class="tweet col-xs-12"></div>');
-            $tweet.html('<span class="userName">@' + tweet.user + '</span>: ' + tweet.message + '<time class="timeago col-xs-12" datetime="' + dateCreated.year + '-' + dateCreated.month + '-' + dateCreated.day + ' ' + dateCreated.hours + ':' + dateCreated.minutes + ':' + dateCreated.seconds + '"></time>');
+            $tweet.html('<a href="#userInfo" class="userName ' + tweet.user + '">@' + tweet.user + '</a>: ' + tweet.message + '<time class="timeago col-xs-12" datetime="' + dateCreated.year + '-' + dateCreated.month + '-' + dateCreated.day + ' ' + dateCreated.hours + ':' + dateCreated.minutes + ':' + dateCreated.seconds + '"></time>');
             $tweet.prependTo($tweets);
             index -= 1;
           }
@@ -137,6 +147,19 @@
           $("#titlePage").fadeIn();
         });
 
+        $("#tweets").on('click', ".userName", function() {
+          $("#userInfo").removeClass("hidden");
+          var username = $(this).attr('class').split(' ')[1];
+          // streams.users.userName, properties created_at and message
+          $("#userInfoName").text(username);
+          pastTweet =
+          $('.tweet:has(.' + username + ')').clone().appendTo("#userInfoPostHistory");
+
+        });
+        $("#goBack").click(function() {
+          $("#userInfo").addClass("hidden");
+          $("#userInfoPostHistory").html('');
+        })
       });
 
     </script>
