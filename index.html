@@ -36,35 +36,34 @@
 
     <nav class="navbar">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="#"><h2>twittler</h2> <i class="fa fa-twitter" aria-hidden="true"></i></a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="col-xs-12">
+        <div>
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Feed<span class="sr-only">(current)</span></a></li>
           </ul>
           <form class="navbar-form navbar-left">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input id="searchInput" type="text" class="form-control" placeholder="Search">
             </div>
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn" id="searchBtn">Submit</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a id="navUsername" href="#">Anonymous User</a></li>
             <form class="navbar-form navbar-right">
               <div class="form-group">
-                <a href="#" class="btn" id="makeTweet">Tweet</a>
+                <button class="btn" id="makeTweet">Tweet</button>
               </div>
             </form>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </nav>
 <div class="mainContent">
+  <div id="searchResults" class="hidden">
 
+  </div>
   <div id="tweetForm" class="hidden">
     <form class="">
       <div class="form-group">
@@ -75,7 +74,7 @@
         <label for="message">Message</label>
         <textarea type="textarea" class="form-control" rows="5" placeholder="Tweet Tweet Tweet" id="message"></textarea>
       </div>
-      <button type="submit" class="btn col-sm-4 col-sm-offset-4 col-xs-12 col-xs-offset-0" id="writeTweetBtn">Tweet Away</button>
+      <button type="submit" class="btn col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0" id="writeTweetBtn">Tweet Away</button>
     </form>
   </div>
   <div class="col-xs-12">
@@ -131,9 +130,11 @@
           jQuery("time.timeago").timeago();
         }
         $("#generateTweetButton").click(generateTweetHtml);
-        $("#makeTweet").click(function() {
+        $("#makeTweet").click(function(e) {
+          e.preventDefault();
+          $("#searchResults").addClass("hidden");
           $("#tweetForm").toggleClass("hidden");
-          $("#tweetForm").toggleClass("col-sm-5 col-sm-offset-7 col-xs-12");
+          $("#tweetForm").toggleClass("col-sm-5 col-sm-offset-7 col-xs-12 col-xs-offset-0");
         });
         $("#enterSite").click(function() {
           $("#titlePage").fadeOut();
@@ -145,16 +146,28 @@
         $("#tweets").on('click', ".userName", function() {
           $("#userInfo").removeClass("hidden");
           var username = $(this).attr('class').split(' ')[1];
-          // streams.users.userName, properties created_at and message
           $("#userInfoName").text(username);
-          pastTweet =
           $('.tweet:has(.' + username + ')').clone().appendTo("#userInfoPostHistory");
-
         });
         $("#goBack").click(function() {
           $("#userInfo").addClass("hidden");
           $("#userInfoPostHistory").html('');
-        })
+        });
+        $("#searchBtn").click(function() {
+          $("#searchResults").html("")
+          $("#tweetForm").addClass("hidden");
+          $("#tweetForm").removeClass("col-sm-5 col-sm-offset-7 col-xs-12 col-xs-offset-0");
+          var searchVal = $("#searchInput").val()
+          $("#searchResults").removeClass("hidden");
+          $(".tweet").filter(function(tweetItem) {
+            return ($(this)['0'].innerText).includes(searchVal) ? tweetItem : undefined;
+          }).clone().appendTo("#searchResults");
+
+        });
+        $("#searchResults").click(function() {
+          $("#searchResults").html('');
+          $("#searchResults").addClass("hidden");
+        });
       });
 
     </script>

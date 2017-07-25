@@ -1,5 +1,5 @@
 .hidden {
-  display:none;
+  display:none !important;
 }
 
 #titlePage {
@@ -112,6 +112,10 @@
   color:lightgray;
 }
 
+#makeTweet {
+  margin-right:20px;
+}
+
 #tweetForm {
   padding-top:30px;
   position:fixed;
@@ -173,11 +177,23 @@ label {
   border-color:white;
 }
 
+#searchResults {
+  color: skyblue;
+  font-family: 'Raleway', sans-serif;
+  text-align:center;
+}
+
 .mark {
     background-color: rgba(255, 255, 255, 0) !important;
 }
 
 @media (max-width: 770px) {
+  #makeTweet {
+    border-radius:10px;
+    padding:15px;
+    margin:0 auto !important;
+    width:80% !important;
+  }
   #tweetForm {
     position:relative;
     margin-bottom:50px;
@@ -189,7 +205,7 @@ label {
     width:100% !important;
   }
   .nav {
-    text-align: center !important;
+    text-align: center;
     font-size:20px;
   }
 }
