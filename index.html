@@ -86,7 +86,6 @@
 
 
     <script>
-
       $(document).ready(function(){
         var visitor;
         var message;
@@ -159,10 +158,12 @@
           $("#tweetForm").removeClass("col-sm-5 col-sm-offset-7 col-xs-12 col-xs-offset-0");
           var searchVal = $("#searchInput").val()
           $("#searchResults").removeClass("hidden");
-          $(".tweet").filter(function(tweetItem) {
-            return ($(this)['0'].innerText).includes(searchVal) ? tweetItem : undefined;
-          }).clone().appendTo("#searchResults");
-
+          var tweetArray = $(".tweet");
+          for(var i = 0; i < tweetArray.length; i++) {
+            if(tweetArray[i].innerText.includes(searchVal)) {
+              $(tweetArray[i]).clone().appendTo("#searchResults");
+            }
+          }
         });
         $("#searchResults").click(function() {
           $("#searchResults").html('');
