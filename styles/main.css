@@ -154,6 +154,7 @@ label {
 
 #userInfo {
   position:fixed;
+  overflow-y: scroll;
   z-index:10;
   height:100%;
   background-color:skyblue;
