@@ -129,8 +129,7 @@
           jQuery("time.timeago").timeago();
         }
         $("#generateTweetButton").click(generateTweetHtml);
-        $("#makeTweet").click(function(e) {
-          e.preventDefault();
+        $("#makeTweet").click(function() {
           $("#searchResults").addClass("hidden");
           $("#tweetForm").toggleClass("hidden");
           $("#tweetForm").toggleClass("col-sm-5 col-sm-offset-7 col-xs-12 col-xs-offset-0");
